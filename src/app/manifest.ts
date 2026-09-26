@@ -6,6 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "Embervale",
     description:
       "A pocket RPG for real life: complete tasks, earn XP and Glimmer, keep your streak burning.",
+    id: "/",
     start_url: "/",
     scope: "/",
     display: "standalone",
