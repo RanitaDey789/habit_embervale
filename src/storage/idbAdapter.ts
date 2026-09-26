@@ -10,7 +10,7 @@ import type { StorageAdapter, StoreName } from "@/storage/adapter";
  */
 interface LooseDb {
   getAll(store: string): Promise<unknown[]>;
-  put(store: string, value: unknown): Promise<unknown>;
+  put(store: string, value: unknown, key?: string): Promise<unknown>;
   delete(store: string, key: string): Promise<void>;
   clear(store: string): Promise<void>;
   get(store: string, key: string): Promise<unknown>;
@@ -63,7 +63,8 @@ export class IdbStorageAdapter implements StorageAdapter {
 
   async kvSet<T>(key: string, value: T): Promise<void> {
     const db = await this.db();
-    await db.put("kv", value);
+    // The kv store has no keyPath, so the key must be passed explicitly.
+    await db.put("kv", value, key);
   }
 
   async clearAll(): Promise<void> {
